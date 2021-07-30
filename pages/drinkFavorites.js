@@ -2,7 +2,15 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 
-export default function DrinkFavorites ( { drink } ) {
+export default function DrinkFavorites () {
+
+    const drink = {"drinks":[{
+        "strDrink":"Strawberry Margarita",
+        "strAlcoholic":"Alcoholic",
+        "strCategory":"Ordinary Drink",
+        "strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/tqyrpw1439905311.jpg",
+        "strInstructions":"Rub rim of cocktail glass with lemon juice and dip rim in salt. Shake schnapps, tequila, triple sec, lemon juice, and strawberries with ice, strain into the salt-rimmed glass, and serve."
+    }]};
 
     if(drink){
         return(
@@ -32,9 +40,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: "row"
     },
     content:{
         padding: 35,

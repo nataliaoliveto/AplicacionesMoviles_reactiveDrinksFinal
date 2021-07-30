@@ -1,13 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts, Quicksand_400Regular } from '@expo-google-fonts/quicksand';
-import Home from './pages/home';
-import DrinkResults from './pages/drinkResults';
-import DrinkSurprise from './pages/drinkSurprise';
-import DrinkFavorites from './pages/drinkFavorites';
-import Navigator from "./navigator/appNavigator";
+import DrawerNavigator from './navigator/drawerNavigator.js'
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -38,32 +32,11 @@ export default function App() {
     "strInstructions":"Rub rim of cocktail glass with lemon juice and dip rim in salt. Shake schnapps, tequila, triple sec, lemon juice, and strawberries with ice, strain into the salt-rimmed glass, and serve."
   }]};
 
-  const drink = 'margarita';
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
-      <Navigator />
+      <DrawerNavigator />
     );
   }
 }
-
-/*
-return (
-        <View style={styles.container}>
-          <Navigator />
-          <StatusBar style="auto" />
-        </View>
-    );
-*/
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: "row"
-  }
-});

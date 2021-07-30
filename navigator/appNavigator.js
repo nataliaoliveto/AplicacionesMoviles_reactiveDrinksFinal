@@ -8,9 +8,8 @@ import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator()
 
-export default Navigator = () => {
+export default function AppNavigator() {
     return (
-        <NavigationContainer initialRouteName='Home'>
         <Stack.Navigator>
             <Stack.Screen 
             name='Home'
@@ -37,17 +36,16 @@ export default Navigator = () => {
                     headerTitleStyle: styles.title,
                 }} />
         </Stack.Navigator>
-        </NavigationContainer>
     );
 }
 
 const styles = StyleSheet.create({
     background: {
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#EEE',
     },
     title:{
         fontWeight: 'bold',
         fontFamily: 'Quicksand_400Regular',
-        color: '#333',
+        color: '#444',
     }
 })
