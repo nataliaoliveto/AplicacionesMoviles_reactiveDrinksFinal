@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Alert } from 'react-native';
 import CustomButton from '../global/customButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import RecomendedCard from '../global/recomendedCard';
 
-export default function Home ( { drink } ) {
+export default function Home () {
 
     const [input, setInput] = React.useState('');
     
@@ -16,12 +17,15 @@ export default function Home ( { drink } ) {
         console.log(input)
     }
 
-    function handleDetailsClick(){
-        console.log("+ details")
-    }
-
     function handleSurpriseClick(){
         console.log("surprise")
+    }
+
+    function handleEmptySearch(){
+        Alert.alert('Empty search :(', 'You should type something related to a drink! Try with the first letter you remember',[
+            {text: 'Try again', onPress: () => console.log('alert closed')},
+            {text: 'Search all drinks', onPress:() => handleSearchClick}
+        ]);
     }
 
     return(
@@ -33,14 +37,9 @@ export default function Home ( { drink } ) {
                 placeholder="type and find your favorite drink"
                 onChangeText={handleInputChange}
                 />
-                <CustomButton text = "Find your drink" onPress={handleSearchClick} />
+                <CustomButton text = "Find your drink" onPress={input.length > 0 ? handleSearchClick : handleEmptySearch} />
                 
-                <View style={styles.suggestion}>
-                    <Text style={styles.suggestionTitle}>↓ r e c o m m e n d e d ↓</Text>
-                    <Text style={styles.suggestionDrink}>{drink && drink.drinks[0].strDrink}</Text>
-                    <Text style={styles.suggestionText}>{drink && drink.drinks[0].strAlcoholic} | {drink && drink.drinks[0].strCategory}</Text>
-                    <CustomButton text = "(+) details" onPress={handleDetailsClick} />
-                </View>
+                <RecomendedCard handleSurpriseClick={handleSurpriseClick} />
 
                 <View style={styles.surprise}>
                     <MaterialCommunityIcons name="clover" style={styles.surpriseIcon} size={25} />
@@ -82,44 +81,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 3,
         marginBottom: 20,
-    },
-    suggestion:{
-        alignSelf: 'center',
-        textAlign: 'center',
-        padding: 15,
-        borderRadius: 15,
-        shadowColor: "#333",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.15,
-        shadowRadius: 2,
-        marginHorizontal: 10,
-        marginVertical: 20,
-        borderLeftColor: '#f1356d',
-        borderLeftWidth: 4,
-        width: '85%'
-    },
-    suggestionTitle:{
-        fontFamily: 'Quicksand_400Regular',
-        fontWeight: 'bold',
-        fontSize: 15,
-        textAlign: 'center',
-        color: 'grey',
-        padding: 5,
-    },
-    suggestionDrink:{
-        fontFamily: 'Quicksand_400Regular',
-        fontSize: 18,
-        color: '#f1356d',
-        marginBottom: 8,
-        fontWeight: 600,
-    },
-    suggestionText:{
-        fontFamily: 'Quicksand_400Regular',
-        color: 'grey',
-        paddingBottom: 15,
     },
     surprise:{
         padding: 25,

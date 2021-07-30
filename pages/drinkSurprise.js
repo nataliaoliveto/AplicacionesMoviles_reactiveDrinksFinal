@@ -2,21 +2,58 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 
-export default function DrinkSurprise ( { drink } ) {
+export default function DrinkSurprise () {
 
-    return(
-        <View style={styles.container}>
-            <View style={styles.content}>
+    const [drinkData, setDrinkData] = React.useState();
+    const [status, setStatus] = React.useState("idle");
 
-                <Text style={styles.title}>Your luck and fate have chosen{"\n"}
-                    <Text style={styles.titleKeyWord}>{drink.drinks[0].strDrink.toUpperCase()}</Text>
-                </Text>
+    React.useEffect(() => {
+        setStatus("loading")
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+        .then((response) => response.json()
+        .then((data) => {
+            if(data.drinks === null){
+                setStatus("error");
+            } else {
+                setDrinkData(data);
+                setStatus("success");
+            }
+        }))
+        .catch(error => setStatus("error"))
+    }, []);
 
-                <DrinkCard drink={drink.drinks[0]}/>
+    if(drinkData && status === "success"){
+        return(
+            <View style={styles.container}>
+                <View style={styles.content}>
 
+                    <Text style={styles.title}>Your luck and fate have chosen{"\n"}
+                        <Text style={styles.titleKeyWord}>{drinkData.drinks[0].strDrink.toUpperCase()}</Text>
+                    </Text>
+
+                    <DrinkCard drink={drinkData.drinks[0]}/>
+
+                </View>
             </View>
-        </View>
-    );
+        );
+    }else if(status === "loading"){
+        return(
+            <View style={styles.container}>
+                <View style={styles.content}>
+                    <Text style={styles.title}>Loading...</Text>
+                </View>
+            </View>
+        );
+    }else if(!drinkData || status === "error"){
+        return(
+            <View style={styles.container}>
+                <View style={styles.content}>
+                    <Text style={styles.title}>An error ocurred.{"\n"}Please go back and try again!</Text>
+                </View>
+            </View>
+        );
+    }
+
 }
 
 const styles = StyleSheet.create({

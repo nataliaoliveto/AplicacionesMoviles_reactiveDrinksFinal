@@ -37,12 +37,14 @@ export default function App() {
     "strInstructions":"Rub rim of cocktail glass with lemon juice and dip rim in salt. Shake schnapps, tequila, triple sec, lemon juice, and strawberries with ice, strain into the salt-rimmed glass, and serve."
   }]};
 
+  const drink = 'margarita';
+
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {
     return (
       <View style={styles.container}>
-        <Home drink={drinkTest}/>
+        <Home />
         <StatusBar style="auto" />
       </View>
     );
