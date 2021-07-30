@@ -2,29 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import CustomButton from '../global/customButton';
 
-export default function RecomendedCard ( { handleSurpriseClick } ) {
-
-    const [drinkData, setDrinkData] = React.useState();
-    const [status, setStatus] = React.useState("idle");
-
-    function handleDetailsClick(){
-        console.log(drinkData.drinks[0].strDrink)
-    }
-
-    React.useEffect(() => {
-        setStatus("loading")
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
-        .then((response) => response.json()
-        .then((data) => {
-            if(data.drinks === null){
-                setStatus("error");
-            } else {
-                setDrinkData(data);
-                setStatus("success");
-            }
-        }))
-        .catch(error => setStatus("error"))
-    }, []);
+export default function RecomendedCard ( { drinkData, status, handleDetailsClick, handleSurpriseClick } ) {
 
     if(drinkData && status === "success"){
         return(

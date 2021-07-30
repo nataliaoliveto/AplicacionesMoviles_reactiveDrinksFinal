@@ -7,6 +7,7 @@ import Home from './pages/home';
 import DrinkResults from './pages/drinkResults';
 import DrinkSurprise from './pages/drinkSurprise';
 import DrinkFavorites from './pages/drinkFavorites';
+import Navigator from "./navigator/appNavigator";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -43,13 +44,19 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <View style={styles.container}>
-        <Home />
-        <StatusBar style="auto" />
-      </View>
+      <Navigator />
     );
   }
 }
+
+/*
+return (
+        <View style={styles.container}>
+          <Navigator />
+          <StatusBar style="auto" />
+        </View>
+    );
+*/
 
 const styles = StyleSheet.create({
   container: {

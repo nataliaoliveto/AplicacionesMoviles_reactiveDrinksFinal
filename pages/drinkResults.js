@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 
-export default function DrinkResults ( { drink } ) {
-
+export default function DrinkResults ( props ) {
+    const drink = props.route.params.drink;
     const [drinkData, setDrinkData] = React.useState();
     const [status, setStatus] = React.useState("idle");
 

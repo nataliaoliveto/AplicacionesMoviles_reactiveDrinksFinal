@@ -4,21 +4,41 @@ import CustomButton from '../global/customButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RecomendedCard from '../global/recomendedCard';
 
-export default function Home () {
+export default function Home ( { navigation } ) {
 
     const [input, setInput] = React.useState('');
-    
+    const [drinkData, setDrinkData] = React.useState();
+    const [status, setStatus] = React.useState("idle");
+
+    React.useEffect(() => {
+        setStatus("loading")
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+        .then((response) => response.json()
+        .then((data) => {
+            if(data.drinks === null){
+                setStatus("error");
+            } else {
+                setDrinkData(data);
+                setStatus("success");
+            }
+        }))
+        .catch(error => setStatus("error"))
+    }, []);
+
     function handleInputChange(value){
         setInput(value);
     }
 
+    function handleDetailsClick(){
+        navigation.navigate('DrinkResults',{drink:drinkData.drinks[0].strDrink});
+    }
+
     function handleSearchClick(){
-        console.log("search")
-        console.log(input)
+        navigation.navigate('DrinkResults',{drink:input});
     }
 
     function handleSurpriseClick(){
-        console.log("surprise")
+        navigation.navigate('DrinkSurprise');
     }
 
     function handleEmptySearch(){
@@ -33,13 +53,17 @@ export default function Home () {
             <View style={styles.content}>
 
                 <TextInput 
-                style={styles.input}
-                placeholder="type and find your favorite drink"
-                onChangeText={handleInputChange}
+                    style={styles.input}
+                    placeholder="type and find your favorite drink"
+                    onChangeText={handleInputChange}
                 />
                 <CustomButton text = "Find your drink" onPress={input.length > 0 ? handleSearchClick : handleEmptySearch} />
                 
-                <RecomendedCard handleSurpriseClick={handleSurpriseClick} />
+                <RecomendedCard
+                    drinkData={drinkData}
+                    status={status}
+                    handleDetailsClick={handleDetailsClick}
+                    handleSurpriseClick={handleSurpriseClick} />
 
                 <View style={styles.surprise}>
                     <MaterialCommunityIcons name="clover" style={styles.surpriseIcon} size={25} />
