@@ -43,7 +43,7 @@ export default function AppNavigator({ navigation }) {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EEE',
-        height: 50,
+        height: 80,
     },
     title:{
         fontWeight: 'bold',

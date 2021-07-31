@@ -14,7 +14,7 @@ export default function CustomButtonLike({ text, onPress }) {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: '#f1356d',
-        border: 0,
+        borderWidth: 0,
         borderRadius: 30,
         width: 30,
         height: 30,

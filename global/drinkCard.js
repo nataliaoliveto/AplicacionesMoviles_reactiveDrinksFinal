@@ -60,18 +60,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     cardIcon:{
-        color: '#white',
+        color: 'white',
         alignSelf: 'center',
-        size: 18
     },
     cardImage: {
         width: 180,
         height: 250,
-        display: 'block',
         margin: 'auto',
-        textAlign: 'center',
         borderRadius: 10,
-        marginBottom: 5
+        marginBottom: 5,
+        display: 'flex'
     },
     cardRecipe:{
         textAlign: 'justify',

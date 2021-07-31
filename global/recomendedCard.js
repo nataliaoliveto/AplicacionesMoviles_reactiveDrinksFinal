@@ -36,6 +36,7 @@ export default function RecomendedCard ( { drinkData, status, handleDetailsClick
 
 const styles = StyleSheet.create({
     suggestion:{
+        justifyContent: 'center',
         alignSelf: 'center',
         textAlign: 'center',
         padding: 15,
@@ -64,18 +65,20 @@ const styles = StyleSheet.create({
     suggestionDrink:{
         fontFamily: 'Quicksand_400Regular',
         fontSize: 18,
+        textAlign: 'center',
         color: '#f1356d',
         marginBottom: 8,
-        fontWeight: 600,
+        fontWeight: '600',
     },
     suggestionText:{
         fontFamily: 'Quicksand_400Regular',
+        textAlign: 'center',
         color: 'grey',
         paddingBottom: 15,
     },
     fakeButton:{
         backgroundColor: '#f1356d',
-        border:0,
+        borderWidth: 0,
         borderRadius: 10,
         marginBottom: 10,
         padding: 8,

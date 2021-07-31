@@ -43,8 +43,7 @@ export default function Home ( { navigation } ) {
 
     function handleEmptySearch(){
         Alert.alert('Empty search :(', 'You should type something related to a drink! Try with the first letter you remember',[
-            {text: 'Try again', onPress: () => console.log('alert closed')},
-            {text: 'Search all drinks', onPress:() => handleSearchClick}
+            {text: 'Try again', onPress: () => console.log('alert closed')}
         ]);
     }
 
@@ -94,7 +93,7 @@ const styles = StyleSheet.create({
         padding: 8,
         borderRadius: 15,        
         fontSize: 13,
-        placeholderTextColor: 'grey',
+        color: 'grey',
         textAlign: 'center',
         shadowColor: "#333",
         shadowOffset: {
