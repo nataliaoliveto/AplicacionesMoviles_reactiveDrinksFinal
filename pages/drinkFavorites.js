@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 
 export default function DrinkFavorites () {
@@ -16,10 +16,12 @@ export default function DrinkFavorites () {
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
-                    
-                    {drink.drinks.map((eachDrink, i) => (
-                        <DrinkCard key={i} drink={eachDrink}/>
+
+                    <ScrollView>
+                    {drink.drinks.map((eachDrink) => (
+                        <DrinkCard key={eachDrink.idDrink} drink={eachDrink}/>
                     ))}
+                    </ScrollView>
                     
                 </View>
             </View>

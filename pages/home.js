@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, Text, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import CustomButton from '../global/customButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RecomendedCard from '../global/recomendedCard';
@@ -48,31 +48,34 @@ export default function Home ( { navigation } ) {
     }
 
     return(
-        <View style={styles.container}>
-            <View style={styles.content}>
+        <TouchableWithoutFeedback onPress={() => {
+            Keyboard.dismiss();
+        }}>
+            <View style={styles.container}>
+                <View style={styles.content}>
 
-                <TextInput 
-                    style={styles.input}
-                    placeholder="type and find your favorite drink"
-                    onChangeText={handleInputChange}
-                    clearTextOnFocus = 'true'
-                />
-                <CustomButton text = "Find your drink" onPress={input.length > 0 ? handleSearchClick : handleEmptySearch} />
-                
-                <RecomendedCard
-                    drinkData={drinkData}
-                    status={status}
-                    handleDetailsClick={handleDetailsClick}
-                    handleSurpriseClick={handleSurpriseClick} />
+                    <TextInput 
+                        style={styles.input}
+                        placeholder="type and find your favorite drink"
+                        onChangeText={handleInputChange}
+                    />
+                    <CustomButton text = "Find your drink" onPress={input.length > 0 ? handleSearchClick : handleEmptySearch} />
+                    
+                    <RecomendedCard
+                        drinkData={drinkData}
+                        status={status}
+                        handleDetailsClick={handleDetailsClick}
+                        handleSurpriseClick={handleSurpriseClick} />
 
-                <View style={styles.surprise}>
-                    <MaterialCommunityIcons name="clover" style={styles.surpriseIcon} size={25} />
-                    <Text style={styles.surpriseText}>Feeling lucky?</Text>
-                    <CustomButton text = "Get a surprise drink" onPress={handleSurpriseClick} />
+                    <View style={styles.surprise}>
+                        <MaterialCommunityIcons name="clover" style={styles.surpriseIcon} size={25} />
+                        <Text style={styles.surpriseText}>Feeling lucky?</Text>
+                        <CustomButton text = "Get a surprise drink" onPress={handleSurpriseClick} />
+                    </View>
+
                 </View>
-
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 

@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         marginHorizontal: 10,
         marginVertical: 20,
+        elevation: 1,
+        backgroundColor: '#ffffff',
         borderLeftColor: '#f1356d',
         borderLeftWidth: 4,
         width: '85%'

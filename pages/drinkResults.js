@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 
 export default function DrinkResults ( props ) {
@@ -32,9 +32,11 @@ export default function DrinkResults ( props ) {
                         <Text style={styles.titleKeyWord}>{drink.toUpperCase()}</Text>
                     </Text>
 
-                    {drinkData.drinks.map((eachDrink, i) => (
-                        <DrinkCard key={i} drink={eachDrink}/>
+                    <ScrollView>
+                    {drinkData.drinks.map((eachDrink) => (
+                        <DrinkCard key={eachDrink.idDrink} drink={eachDrink}/>
                     ))}
+                    </ScrollView>
 
                 </View>
             </View>

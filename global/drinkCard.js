@@ -17,7 +17,7 @@ export default function DrinkCard ( { drink } ) {
             <CustomButtonLike text = {<AntDesign name="hearto" style={styles.cardIcon} size={18} />} onPress={toAvoidButtonBreakCode} />
             <Image
                 style={styles.cardImage}
-                source={drink.strDrinkThumb}
+                source={{ uri: drink.strDrinkThumb}}
             />
             <Text style={styles.cardDetails}>↓ Recipe details ↓</Text>
             <Text style={styles.cardRecipe}>{drink.strInstructions}</Text>
@@ -30,14 +30,16 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         padding: 15,
         borderRadius: 15,
-        shadowColor: "#333",
+        shadowColor: '#333',
+        shadowOpacity: 0.15,
+        shadowRadius: 3,
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.15,
-        shadowRadius: 3,
-        width: '100%',
+        elevation: 1,
+        backgroundColor: '#ffffff',
+        width: '95%',
         alignSelf: 'center'
     },
     cardTitle:{
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
         margin: 'auto',
         borderRadius: 10,
         marginBottom: 5,
-        display: 'flex'
+        alignSelf: 'center'
     },
     cardRecipe:{
         textAlign: 'justify',
