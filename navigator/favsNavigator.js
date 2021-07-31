@@ -2,17 +2,18 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import drinkFavorites from '../pages/drinkFavorites';
 import { StyleSheet } from 'react-native';
+import Header from '../global/header';
 
 const Stack = createStackNavigator()
 
-export default function FavsNavigator () {
+export default function FavsNavigator ({ navigation }) {
     return (
         <Stack.Navigator>
             <Stack.Screen 
             name='drinkFavorites'
             component={drinkFavorites}
             options={{ 
-                title: 'Favorites',
+                headerTitle: () => <Header navigation={navigation} title='Favorites'/>,
                 headerStyle: styles.background,
                 headerTitleStyle: styles.title,
                 }} />
@@ -23,6 +24,7 @@ export default function FavsNavigator () {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EEE',
+        height: 50,
     },
     title:{
         fontWeight: 'bold',

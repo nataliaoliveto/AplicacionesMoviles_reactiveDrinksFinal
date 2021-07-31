@@ -56,6 +56,7 @@ export default function Home ( { navigation } ) {
                     style={styles.input}
                     placeholder="type and find your favorite drink"
                     onChangeText={handleInputChange}
+                    clearTextOnFocus = 'true'
                 />
                 <CustomButton text = "Find your drink" onPress={input.length > 0 ? handleSearchClick : handleEmptySearch} />
                 

@@ -1,21 +1,22 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../pages/home";
 import DrinkResults from "../pages/drinkResults";
 import DrinkSurprise from "../pages/drinkSurprise";
 import { StyleSheet } from 'react-native';
+import Header from '../global/header';
 
 const Stack = createStackNavigator()
 
-export default function AppNavigator() {
+export default function AppNavigator({ navigation }) {
+
     return (
         <Stack.Navigator>
             <Stack.Screen 
             name='Home'
             component={Home}
             options={{ 
-                title: 'Reactive Drinks',
+                headerTitle: () => <Header navigation={navigation} title='Reactive Drinks'/>,
                 headerStyle: styles.background,
                 headerTitleStyle: styles.title,
                 }} />
@@ -42,6 +43,7 @@ export default function AppNavigator() {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EEE',
+        height: 50,
     },
     title:{
         fontWeight: 'bold',

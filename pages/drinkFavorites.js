@@ -16,8 +16,7 @@ export default function DrinkFavorites () {
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.title}>Your favorite drinks{"\n"}</Text>
-
+                    
                     {drink.drinks.map((eachDrink, i) => (
                         <DrinkCard key={i} drink={eachDrink}/>
                     ))}
