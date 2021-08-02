@@ -24,6 +24,7 @@ export default function DrinkResults ( props ) {
         }, [drink]);
 
     if(drinkData && status === "success"){
+        console.log(drinkData)
         return(
             <View style={styles.container}>
                 <View style={styles.content}>

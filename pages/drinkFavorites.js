@@ -1,24 +1,51 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function DrinkFavorites () {
 
-    const drink = {"drinks":[{
-        "strDrink":"Strawberry Margarita",
-        "strAlcoholic":"Alcoholic",
-        "strCategory":"Ordinary Drink",
-        "strDrinkThumb":"https:\/\/www.thecocktaildb.com\/images\/media\/drink\/tqyrpw1439905311.jpg",
-        "strInstructions":"Rub rim of cocktail glass with lemon juice and dip rim in salt. Shake schnapps, tequila, triple sec, lemon juice, and strawberries with ice, strain into the salt-rimmed glass, and serve."
-    }]};
+    const [favorites, setFavorites] = React.useState();
 
-    if(drink){
+    const bringKeysFromStorage = async () => {
+        let keys = []
+        try{
+            keys = await AsyncStorage.getAllKeys();
+            if(keys !== null){
+                return keys
+            }
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    const bringDataFromStorage = async (keys) => {
+        const favoriteStore = await AsyncStorage.multiGet(keys)
+
+        let favoriteJSON = favoriteStore.map((eachFavorite) => {
+            return JSON.parse(eachFavorite[1]);
+        })
+        return favoriteJSON;
+    }
+
+    const bringFavoritesFromStorage = async () => {
+        bringKeysFromStorage()
+        .then(bringDataFromStorage)
+        .then(setFavorites)
+    }
+    
+    React.useEffect(() => {
+        bringFavoritesFromStorage()
+    }, []);
+
+    if(favorites){
+
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
-
+                    
                     <ScrollView>
-                    {drink.drinks.map((eachDrink) => (
+                    {favorites.map((eachDrink) => (
                         <DrinkCard key={eachDrink.idDrink} drink={eachDrink}/>
                     ))}
                     </ScrollView>

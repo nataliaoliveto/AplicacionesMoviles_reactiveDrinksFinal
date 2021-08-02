@@ -2,19 +2,30 @@ import React from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import CustomButtonLike from '../global/customButtonLike';
 import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function DrinkCard ( { drink } ) {
 
-    function toAvoidButtonBreakCode(){
-        // TODO: This is not correct, don't forget to replace it :)
-        console.log(drink.strDrink)
-    }
+    const [isFavorite, setIsFavorite] = React.useState();
+
+    const handleSetFavorite = async () => { 
+        const favorite = await AsyncStorage.getItem(drink.idDrink);
+        const favoriteJSON = JSON.parse(favorite);
+
+        if(favoriteJSON === null){ 
+            setIsFavorite(true);
+            await AsyncStorage.setItem(drink.idDrink, JSON.stringify(drink));
+        } else {
+            await AsyncStorage.removeItem(drink.idDrink);
+            setIsFavorite(false);
+        }
+    };
 
     return(
         <View style={styles.card}>
             <Text style={styles.cardTitle}>{drink.strDrink}</Text>
             <Text style={styles.cardDetails}>{drink.strAlcoholic} | {drink.strCategory}</Text>
-            <CustomButtonLike text = {<AntDesign name="hearto" style={styles.cardIcon} size={18} />} onPress={toAvoidButtonBreakCode} />
+            <CustomButtonLike text = {<AntDesign name={isFavorite ? "heart" : "hearto"} style={styles.cardIcon} size={18} />} onPress={ handleSetFavorite } />
             <Image
                 style={styles.cardImage}
                 source={{ uri: drink.strDrinkThumb}}
