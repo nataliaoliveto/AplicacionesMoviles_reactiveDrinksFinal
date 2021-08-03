@@ -1,26 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import DrinkCard from '../global/drinkCard';
+import useFetch from '../global/useFetch'
 
 export default function DrinkSurprise () {
 
-    const [drinkData, setDrinkData] = React.useState();
-    const [status, setStatus] = React.useState("idle");
-
-    React.useEffect(() => {
-        setStatus("loading")
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
-        .then((response) => response.json()
-        .then((data) => {
-            if(data.drinks === null){
-                setStatus("error");
-            } else {
-                setDrinkData(data);
-                setStatus("success");
-            }
-        }))
-        .catch(error => setStatus("error"))
-    }, []);
+    const { drinkData, status } = useFetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
 
     if(drinkData && status === "success"){
         return(

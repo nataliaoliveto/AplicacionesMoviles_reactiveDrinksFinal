@@ -1,27 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
+import useFetch from '../global/useFetch';
 
 export default function DrinkResults ( props ) {
     const drink = props.route.params.drink;
-    const [drinkData, setDrinkData] = React.useState();
-    const [status, setStatus] = React.useState("idle");
 
-    React.useEffect(() => {
-        setStatus("loading");
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
-            .then((response) =>
-            response.json().then((data) => {
-                if (data.drinks === null) {
-                setStatus("error");
-                } else {
-                setDrinkData(data);
-                setStatus("success");
-                }
-            })
-            )
-            .catch((error) => setStatus("error"));
-        }, [drink]);
+    const { drinkData, status } = useFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`)
 
     if(drinkData && status === "success"){
         return(

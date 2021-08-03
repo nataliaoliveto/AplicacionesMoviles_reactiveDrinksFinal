@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function DrinkFavorites () {
 
@@ -61,7 +62,7 @@ export default function DrinkFavorites () {
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.title}>No favorites yet{"\n"}Go back and give some ❤</Text>
+                    <Text style={styles.title}>No favorites yet{"\n"}Go back and give some <AntDesign name="heart" style={styles.cardIcon} size={15} /></Text>
                 </View>
             </View>
         );
@@ -89,5 +90,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#f2f2f2',
         borderBottomWidth: 1,
         alignSelf: 'center',
-    }
+    },
+    cardIcon:{
+        color: '#f1356d',
+    },
 })
