@@ -2,10 +2,11 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function DrinkFavorites () {
 
-    const [favorites, setFavorites] = React.useState();
+    const [favorites, setFavorites] = React.useState([]);
 
     const bringKeysFromStorage = async () => {
         let keys = []
@@ -31,22 +32,25 @@ export default function DrinkFavorites () {
     const bringFavoritesFromStorage = async () => {
         bringKeysFromStorage()
         .then(bringDataFromStorage)
-        .then(setFavorites)
+        .then(result => {
+            if(JSON.stringify(favorites) != JSON.stringify(result)){
+                setFavorites([...result])
+            }
+        })
     }
-    
-    React.useEffect(() => {
-        bringFavoritesFromStorage()
-    }, []);
 
-    if(favorites){
+    useFocusEffect(() => {
+        bringFavoritesFromStorage();
+    })
 
+    if(favorites.length > 0){
         return(
             <View style={styles.container}>
                 <View style={styles.content}>
                     
                     <ScrollView>
                     {favorites.map((eachDrink) => (
-                        <DrinkCard key={eachDrink.idDrink} drink={eachDrink}/>
+                        <DrinkCard key={eachDrink.idDrink} drink={eachDrink} onFavoriteUpdated={bringFavoritesFromStorage}/>
                     ))}
                     </ScrollView>
                     

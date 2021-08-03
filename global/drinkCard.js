@@ -4,22 +4,32 @@ import CustomButtonLike from '../global/customButtonLike';
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function DrinkCard ( { drink } ) {
+export default function DrinkCard ( { drink, onFavoriteUpdated } ) {
 
-    const [isFavorite, setIsFavorite] = React.useState();
+    const [isFavorite, setIsFavorite] = React.useState(false);
 
     const handleSetFavorite = async () => { 
-        const favorite = await AsyncStorage.getItem(drink.idDrink);
-        const favoriteJSON = JSON.parse(favorite);
-
-        if(favoriteJSON === null){ 
-            setIsFavorite(true);
+        if(!isFavorite){
             await AsyncStorage.setItem(drink.idDrink, JSON.stringify(drink));
+            setIsFavorite(true);
         } else {
             await AsyncStorage.removeItem(drink.idDrink);
             setIsFavorite(false);
         }
+        if(onFavoriteUpdated != null){
+            onFavoriteUpdated();
+        }
     };
+
+    const checkFavorite = async () => {
+        const favorite = await AsyncStorage.getItem(drink.idDrink);
+        const favoriteJSON = JSON.parse(favorite);
+        setIsFavorite(favoriteJSON !== null);
+    }
+
+    React.useEffect(() => {
+        checkFavorite()
+    }, []);
 
     return(
         <View style={styles.card}>
