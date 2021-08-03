@@ -3,27 +3,12 @@ import { StyleSheet, View, TextInput, Text, Alert, TouchableWithoutFeedback, Key
 import CustomButton from '../global/customButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import RecomendedCard from '../global/recomendedCard';
+import useFetch from '../global/useFetch';
 
 export default function Home ( { navigation } ) {
 
     const [input, setInput] = React.useState('');
-    const [drinkData, setDrinkData] = React.useState();
-    const [status, setStatus] = React.useState("idle");
-
-    React.useEffect(() => {
-        setStatus("loading")
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
-        .then((response) => response.json()
-        .then((data) => {
-            if(data.drinks === null){
-                setStatus("error");
-            } else {
-                setDrinkData(data);
-                setStatus("success");
-            }
-        }))
-        .catch(error => setStatus("error"))
-    }, []);
+    const { drinkData, status } = useFetch(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
 
     function handleInputChange(value){
         setInput(value);

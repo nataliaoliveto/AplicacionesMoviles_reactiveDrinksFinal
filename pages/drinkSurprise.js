@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import DrinkCard from '../global/drinkCard';
-import useFetch from '../global/useFetch'
+import useFetch from '../global/useFetch';
 
 export default function DrinkSurprise () {
 
@@ -15,9 +15,9 @@ export default function DrinkSurprise () {
                     <Text style={styles.title}>Your luck and fate have chosen{"\n"}
                         <Text style={styles.titleKeyWord}>{drinkData.drinks[0].strDrink.toUpperCase()}</Text>
                     </Text>
-
+                    <ScrollView>
                     <DrinkCard drink={drinkData.drinks[0]}/>
-
+                    </ScrollView>
                 </View>
             </View>
         );

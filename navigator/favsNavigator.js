@@ -16,7 +16,7 @@ export default function FavsNavigator ({ navigation }) {
                 headerTitle: () => <Header navigation={navigation} title='Favorites'/>,
                 headerStyle: styles.background,
                 headerTitleStyle: styles.title,
-                }} />
+                }}/>
         </Stack.Navigator>
     );
 }
@@ -24,7 +24,7 @@ export default function FavsNavigator ({ navigation }) {
 const styles = StyleSheet.create({
     background: {
         backgroundColor: '#EEE',
-        height: 80,
+        height: 95,
     },
     title:{
         fontWeight: 'bold',
