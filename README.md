@@ -2,6 +2,8 @@
 
 ## Final exam - Mobile Apps - React Native
 
+[Android Expo QR](https://expo.dev/@natdv/reactiveDrinksFinal)
+
 ### About this app
 
 - This is a final exam - learning purpose only :)
