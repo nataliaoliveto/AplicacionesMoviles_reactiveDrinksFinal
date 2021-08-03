@@ -2,7 +2,7 @@
 
 ## Final exam - Mobile Apps - React Native
 
-[Android Expo QR](https://expo.dev/@natdv/reactiveDrinksFinal)
+- [Android Expo QR](https://expo.dev/@natdv/reactiveDrinksFinal)
 
 ### About this app
 
